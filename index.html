@@ -11,111 +11,92 @@
             --gold-dim: #b8860b;
             --deep-red: #c00000;
             --bg: #050505;
-            --glass: rgba(20, 20, 20, 0.85);
+            --glass: rgba(20, 20, 20, 0.9);
             --border: rgba(255, 255, 255, 0.15);
             --text: #e0e0e0;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
 
-        .hud-border {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            border: 15px solid transparent; border-image: radial-gradient(circle, var(--border) 1%, transparent 100%) 1;
-            pointer-events: none; z-index: 1001;
-        }
-
         .top-nav {
-            background: rgba(0,0,0,0.95);
+            background: #000;
             border-bottom: 2px solid var(--gold-dim);
             padding: 12px 40px;
             display: flex; justify-content: space-between;
             font-family: 'VT323', monospace; color: var(--gold);
-            letter-spacing: 2px; position: sticky; top: 0; z-index: 1002;
+            position: sticky; top: 0; z-index: 1002;
         }
 
         header {
-            height: 60vh;
+            height: 50vh;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            background: linear-gradient(to bottom, rgba(5,5,5,0.4), var(--bg)), url('image_7477d5.jpg');
-            background-size: cover; background-position: center; background-attachment: fixed;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('image_7477d5.jpg');
+            background-size: cover; background-position: center;
             text-align: center; border-bottom: 1px solid var(--border);
         }
 
-        .main-logo { font-family: 'Cinzel', serif; font-size: clamp(3rem, 10vw, 8rem); color: #fff; text-shadow: 0 0 40px rgba(255,255,255,0.2); line-height: 0.8; }
-        .sub-logo { font-family: 'Oswald', sans-serif; color: var(--deep-red); letter-spacing: 12px; margin-top: 20px; font-weight: 700; text-transform: uppercase; }
+        .main-logo { font-family: 'Cinzel', serif; font-size: 5rem; color: #fff; line-height: 0.8; }
+        .sub-logo { font-family: 'Oswald', sans-serif; color: var(--deep-red); letter-spacing: 10px; margin-top: 15px; text-transform: uppercase; }
 
-        .tab-menu { background: var(--glass); backdrop-filter: blur(25px); border-bottom: 1px solid var(--border); display: flex; justify-content: center; gap: 20px; }
+        .tab-menu { background: var(--glass); border-bottom: 1px solid var(--border); display: flex; justify-content: center; }
         .tab-menu button {
-            background: none; border: none; padding: 25px 35px; color: #777;
-            font-family: 'Oswald'; font-size: 1rem; letter-spacing: 3px; cursor: pointer; transition: 0.4s;
+            background: none; border: none; padding: 20px 30px; color: #888;
+            font-family: 'Oswald'; cursor: pointer; transition: 0.3s;
         }
-        .tab-menu button:hover { color: #fff; background: rgba(255,255,255,0.05); }
         .tab-menu button.active { color: var(--gold); border-bottom: 3px solid var(--gold); }
 
         .grid-container {
-            max-width: 1400px; margin: 50px auto; padding: 0 40px;
-            display: grid; grid-template-columns: 1fr 400px; gap: 50px;
+            max-width: 1300px; margin: 40px auto; padding: 0 20px;
+            display: grid; grid-template-columns: 1fr 380px; gap: 40px;
         }
 
         .intel-card {
-            background: var(--glass); border: 1px solid var(--border); padding: 45px;
-            border-radius: 4px; position: relative; margin-bottom: 35px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .intel-card::before {
-            content: ""; position: absolute; top: -1px; left: 0; width: 60px; height: 3px; background: var(--gold);
+            background: #111; border: 1px solid var(--border); padding: 40px;
+            margin-bottom: 30px; border-top: 4px solid var(--gold);
         }
 
-        .headline { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 25px; font-style: italic; color: #fff; line-height: 1.1; }
+        .headline { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 20px; color: #fff; }
         
         .feature-img { 
-            width: 100%; border: 1px solid var(--border); margin: 25px 0; 
-            border-radius: 4px; box-shadow: 0 0 20px rgba(0,0,0,0.4);
-            transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+            width: 100%; border: 1px solid #444; margin: 20px 0; 
+            border-radius: 4px;
         }
-        .feature-img:hover { transform: scale(1.02); }
 
         .elite-index {
-            background: #0a0a0a; padding: 35px; border: 1px solid var(--gold-dim);
-            border-radius: 8px; position: sticky; top: 120px; box-shadow: 0 0 50px rgba(0,0,0,1);
+            background: #000; padding: 30px; border: 1px solid var(--gold-dim);
+            border-radius: 4px;
         }
-        .index-title { font-family: 'Oswald'; font-size: 1.3rem; color: var(--gold); margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 15px; letter-spacing: 2px; }
+        .index-title { font-family: 'Oswald'; color: var(--gold); margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
 
-        .rank-list { list-style: none; font-family: 'VT323', monospace; font-size: 1.7rem; }
-        .rank-list li { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.03); color: #bbb; }
+        .rank-list { list-style: none; font-family: 'VT323', monospace; font-size: 1.6rem; }
+        .rank-list li { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #222; }
         
         .tito-rank { 
-            background: linear-gradient(90deg, rgba(255, 204, 0, 0.15), transparent);
-            color: var(--gold) !important; font-weight: bold; padding: 12px 10px !important; border-radius: 4px;
+            background: rgba(255, 204, 0, 0.1);
+            color: var(--gold); font-weight: bold; padding: 10px !important;
         }
 
-        .tab-view { display: none; animation: slideUp 0.7s forwards; }
+        .tab-view { display: none; }
         .tab-view.active { display: block; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-
-        @media (max-width: 1100px) { .grid-container { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-<div class="hud-border"></div>
-
 <div class="top-nav">
-    <span>INTEL_STREAM: YWS_OFFICIAL</span>
-    <span id="live-clock">--:--:--</span>
-    <span>STATUS: ENCRYPTED_BROADCAST</span>
+    <span>YWS BUREAU // LIVE FEED</span>
+    <span id="live-clock">00:00:00</span>
+    <span>STATUS: SECURE</span>
 </div>
 
 <header>
     <h1 class="main-logo">Yugoslav</h1>
     <h1 class="main-logo" style="color:var(--gold);">World Service</h1>
-    <p class="sub-logo">Sovereign Intel Hub • Slyn City</p>
+    <p class="sub-logo">Sovereign Intel • Slyn City</p>
 </header>
 
 <nav class="tab-menu">
     <button class="active" onclick="switchTab('dispatch', this)">DISPATCH</button>
-    <button onclick="switchTab('archives', this)">ARCHIVES</button>
     <button onclick="switchTab('economy', this)">WEALTH META</button>
 </nav>
 
@@ -123,46 +104,27 @@
     <main>
         <section id="dispatch" class="tab-view active">
             <div class="intel-card">
-                <span style="color:var(--gold); font-family:'Oswald'; font-weight:bold;">// FIELD REPORT: SLYN CITY</span>
-                <h2 class="headline">Bookstore Grand Opening & Urban Expansion</h2>
-                <img src="image_7477d5.jpg" class="feature-img" alt="Slyn City Bookstore Exterior">
-                <p style="font-size: 1.3rem; line-height: 1.8; color: #ccc;">
-                    Slyn City continues its ascent as the cultural capital of the northern territories. [Elite]SlyntX has officially inaugurated the Bookstore, providing a premier hub for trade secrets and faction lore.
+                <h2 class="headline">Slyn City Bookstore Grand Opening</h2>
+                <img src="image_7477d5.jpg" class="feature-img" alt="Bookstore Exterior">
+                <p style="font-size: 1.2rem; line-height: 1.6;">
+                    The Slyn City Bookstore is now officially open. Managed by [Elite]SlyntX, this facility stands as a premier cultural hub for trade secrets and faction lore in the northern territories.
                 </p>
             </div>
             
             <div class="intel-card">
-                <span style="color:var(--deep-red); font-family:'Oswald'; font-weight:bold;">// PERSONNEL INTEL</span>
-                <h2 class="headline">[Elite]SlyntX: The Visionary of Slytaly</h2>
-                <img src="image_7477d1.jpg" class="feature-img" alt="[Elite]SlyntX at the Bookstore">
-                <p style="font-size: 1.2rem; line-height: 1.7; color: #bbb;">
-                    Consistently leading the Wealth Index, [Elite]SlyntX remains the driving economic force behind the Slyn City renaissance.
-                </p>
-            </div>
-        </section>
-
-        <section id="archives" class="tab-view">
-            <div class="intel-card">
-                <h2 class="headline">Global Wealth Verification</h2>
-                <img src="image_74257c.jpg" class="feature-img" alt="Official Server Wealth Index">
-                <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px;">
-                    Bureau records verify current sovereign rankings across the GeoForge server. [Elite]SlyntX maintains the #1 position with $1,241,443.87, followed by SleepyRoosa and TheEdgyRocket.
+                <h2 class="headline">The Visionary: [Elite]SlyntX</h2>
+                <img src="image_7477d1.jpg" class="feature-img" alt="SlyntX at Bookstore">
+                <p style="font-size: 1.2rem; line-height: 1.6;">
+                    Economic intelligence confirms [Elite]SlyntX as a leading infrastructure developer and the current #1 wealth holder on the server.
                 </p>
             </div>
         </section>
 
         <section id="economy" class="tab-view">
             <div class="intel-card">
-                <h2 class="headline">The Lapis Strategy Revealed</h2>
-                <div style="background: rgba(255,204,0,0.03); border: 1px dashed var(--gold-dim); padding: 35px;">
-                    <p style="font-size: 1.4rem; line-height: 1.7; margin-bottom: 25px; color: #fff;">
-                        Economic intelligence identifies the "Lapis Meta" as the optimized path to wealth:
-                    </p>
-                    <ul style="list-style: none; font-size: 1.2rem; line-height: 2.2;">
-                        <li><span style="color:var(--gold);">[01]</span> Utilize Fortune-enchanted equipment for Lapis extraction.</li>
-                        <li><span style="color:var(--gold);">[02]</span> Liquidation via trade nodes for maximum yield.</li>
-                    </ul>
-                </div>
+                <h2 class="headline">Wealth Data Verification</h2>
+                <img src="image_74211e.png" class="feature-img" alt="Wealth Screenshot">
+                <p style="font-size: 1.2rem;">Official ledger confirmation of the top economic powers.</p>
             </div>
         </section>
     </main>
@@ -171,16 +133,16 @@
         <div class="elite-index">
             <h3 class="index-title">GLOBAL WEALTH INDEX</h3>
             <ul class="rank-list">
-                <li><span>1. [Elite]SlyntX</span><span>$1,241,443.87</span></li>
+                <li><span>1. [Elite]SlyntX</span><span>$1,240,232.42</span></li>
                 <li><span>2. SleepyRoosa</span><span>$609,939.39</span></li>
                 <li><span>3. TheEdgyRocket</span><span>$575,939.93</span></li>
-                <li><span>4. AlphaPlayer1284</span><span>$450,665.53</span></li>
+                <li><span>4. AlphaPlayer1284</span><span>$436,310.53</span></li>
                 <li><span>5. BoiledEggs69</span><span>$329,070.25</span></li>
-                <li><span>6. _nwonkn4</span><span>$317,901.65</span></li>
-                <li class="tito-rank"><span>7. Josip_Broz__Tito</span><span>$312,463.55</span></li>
+                <li class="tito-rank"><span>6. Josip_Broz__Tito</span><span>$326,818.55</span></li>
+                <li><span>7. _nwonkn4</span><span>$317,901.65</span></li>
                 <li><span>8. MarcelBziok13</span><span>$282,591.75</span></li>
             </ul>
-            <p style="font-family:'VT323'; color: #444; margin-top: 25px; font-size: 1.1rem;">*DATA SYNC: VERIFIED</p>
+            <p style="font-family:'VT323'; color: #555; margin-top: 15px;">*VERIFIED DATA</p>
         </div>
     </aside>
 </div>
@@ -191,13 +153,12 @@
         document.getElementById(tabId).classList.add('active');
         document.querySelectorAll('.tab-menu button').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        window.scrollTo({top: 450, behavior: 'smooth'});
     }
 
     function startClock() {
         setInterval(() => {
             const now = new Date();
-            document.getElementById('live-clock').innerText = "// " + now.toLocaleTimeString() + " //";
+            document.getElementById('live-clock').innerText = now.toLocaleTimeString();
         }, 1000);
     }
     startClock();
