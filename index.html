@@ -12,82 +12,99 @@
             --deep-red: #c00000;
             --bg: #050505;
             --glass: rgba(20, 20, 20, 0.85);
-            --border: rgba(255, 255, 255, 0.1);
+            --border: rgba(255, 255, 255, 0.15);
             --text: #e0e0e0;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
         body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
 
+        /* HUD OVERLAY */
         .hud-border {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            border: 20px solid transparent; border-image: radial-gradient(circle, var(--border) 1%, transparent 100%) 1;
+            border: 15px solid transparent; border-image: radial-gradient(circle, var(--border) 1%, transparent 100%) 1;
             pointer-events: none; z-index: 1001;
         }
 
+        /* SYSTEM NAV BAR */
         .top-nav {
-            background: rgba(0,0,0,0.9);
-            border-bottom: 1px solid var(--gold-dim);
-            padding: 10px 40px;
+            background: rgba(0,0,0,0.95);
+            border-bottom: 2px solid var(--gold-dim);
+            padding: 12px 40px;
             display: flex; justify-content: space-between;
             font-family: 'VT323', monospace; color: var(--gold);
             letter-spacing: 2px; position: sticky; top: 0; z-index: 1002;
         }
 
+        /* HERO SECTION */
         header {
-            height: 60vh;
+            height: 65vh;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
+            /* IMAGE FIX: SLYN CITY BOOKSTORE EXTERIOR */
             background: linear-gradient(to bottom, rgba(5,5,5,0.4), var(--bg)), url('image_7477d5.jpg');
             background-size: cover; background-position: center; background-attachment: fixed;
             text-align: center; border-bottom: 1px solid var(--border);
         }
 
-        .main-logo { font-family: 'Cinzel', serif; font-size: clamp(3rem, 10vw, 8rem); color: #fff; text-shadow: 0 0 30px rgba(255,255,255,0.2); line-height: 0.8; }
-        .sub-logo { font-family: 'Oswald', sans-serif; color: var(--deep-red); letter-spacing: 15px; margin-top: 20px; font-weight: 700; text-transform: uppercase; }
+        .main-logo { font-family: 'Cinzel', serif; font-size: clamp(3rem, 10vw, 8rem); color: #fff; text-shadow: 0 0 40px rgba(255,255,255,0.2); line-height: 0.8; }
+        .sub-logo { font-family: 'Oswald', sans-serif; color: var(--deep-red); letter-spacing: 12px; margin-top: 20px; font-weight: 700; text-transform: uppercase; }
 
-        .tab-menu { background: var(--glass); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); display: flex; justify-content: center; }
+        /* TABS */
+        .tab-menu { background: var(--glass); backdrop-filter: blur(25px); border-bottom: 1px solid var(--border); display: flex; justify-content: center; gap: 20px; }
         .tab-menu button {
-            background: none; border: none; padding: 25px 40px; color: #666;
-            font-family: 'Oswald'; font-size: 1.1rem; letter-spacing: 3px; cursor: pointer; transition: 0.4s;
+            background: none; border: none; padding: 25px 35px; color: #777;
+            font-family: 'Oswald'; font-size: 1rem; letter-spacing: 3px; cursor: pointer; transition: 0.4s;
         }
-        .tab-menu button:hover { color: #fff; }
+        .tab-menu button:hover { color: #fff; background: rgba(255,255,255,0.05); }
         .tab-menu button.active { color: var(--gold); border-bottom: 3px solid var(--gold); }
 
+        /* LAYOUT */
         .grid-container {
-            max-width: 1400px; margin: 60px auto; padding: 0 40px;
-            display: grid; grid-template-columns: 1fr 400px; gap: 60px;
+            max-width: 1400px; margin: 50px auto; padding: 0 40px;
+            display: grid; grid-template-columns: 1fr 400px; gap: 50px;
         }
 
+        /* ARTICLE CARDS */
         .intel-card {
-            background: var(--glass); border: 1px solid var(--border); padding: 50px;
-            border-radius: 4px; position: relative; margin-bottom: 40px;
+            background: var(--glass); border: 1px solid var(--border); padding: 45px;
+            border-radius: 4px; position: relative; margin-bottom: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .intel-card::before {
-            content: " "; position: absolute; top: -1px; left: 50%; width: 100px; height: 3px;
-            background: var(--gold); transform: translateX(-50%);
+            content: ""; position: absolute; top: -1px; left: 0; width: 60px; height: 3px; background: var(--gold);
         }
 
-        .headline { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-bottom: 30px; font-style: italic; color: #fff; line-height: 1; }
-        .feature-img { width: 100%; border-radius: 2px; border: 1px solid var(--border); margin: 30px 0; transition: 0.5s; }
+        .headline { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 25px; font-style: italic; color: #fff; line-height: 1.1; }
         
+        /* IMAGE FIX: NEWS CONTENT PHOTOS */
+        .feature-img { 
+            width: 100%; border: 1px solid var(--border); margin: 25px 0; 
+            border-radius: 4px; box-shadow: 0 0 20px rgba(0,0,0,0.4);
+            transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+        .feature-img:hover { transform: scale(1.02); }
+
+        /* SIDEBAR WEALTH DATA */
         .elite-index {
-            background: #111; padding: 30px; border: 1px solid var(--gold-dim);
-            border-radius: 8px; position: sticky; top: 120px;
+            background: #0a0a0a; padding: 35px; border: 1px solid var(--gold-dim);
+            border-radius: 8px; position: sticky; top: 120px; box-shadow: 0 0 50px rgba(0,0,0,1);
         }
-        .index-title { font-family: 'Oswald'; font-size: 1.2rem; color: var(--gold); margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        .index-title { font-family: 'Oswald'; font-size: 1.3rem; color: var(--gold); margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 15px; letter-spacing: 2px; }
 
-        .rank-list { list-style: none; font-family: 'VT323', monospace; font-size: 1.6rem; }
-        .rank-list li { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .rank-list { list-style: none; font-family: 'VT323', monospace; font-size: 1.7rem; }
+        .rank-list li { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.03); color: #bbb; }
         
+        /* PLAYER TITO HIGHLIGHT */
         .tito-rank { 
-            background: linear-gradient(90deg, transparent, rgba(255, 204, 0, 0.1), transparent);
-            color: var(--gold); font-weight: bold; padding: 15px 10px; border-radius: 4px;
-            box-shadow: 0 0 15px rgba(255, 204, 0, 0.1);
+            background: linear-gradient(90deg, rgba(255, 204, 0, 0.15), transparent);
+            color: var(--gold) !important; font-weight: bold; padding: 12px 10px !important; border-radius: 4px;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
+            border: 1px solid rgba(255, 204, 0, 0.2);
         }
 
-        .tab-view { display: none; animation: fadeIn 0.8s forwards; }
+        .tab-view { display: none; animation: slideUp 0.7s forwards; }
         .tab-view.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
         @media (max-width: 1100px) { .grid-container { grid-template-columns: 1fr; } }
     </style>
@@ -97,15 +114,15 @@
 <div class="hud-border"></div>
 
 <div class="top-nav">
-    <span>SYSTEM: TITAN_CORRESPONDENT_v5.0</span>
-    <span id="live-clock">00:00:00</span>
-    <span>STATUS: BROADCASTING_SECURE</span>
+    <span>INTEL_STREAM: YWS_OFFICIAL</span>
+    <span id="live-clock">--:--:--</span>
+    <span>STATUS: ENCRYPTED_BROADCAST</span>
 </div>
 
 <header>
     <h1 class="main-logo">Yugoslav</h1>
     <h1 class="main-logo" style="color:var(--gold);">World Service</h1>
-    <p class="sub-logo">Sovereign Bureau • GeoForge</p>
+    <p class="sub-logo">Sovereign Intel Hub • Slyn City</p>
 </header>
 
 <nav class="tab-menu">
@@ -118,46 +135,48 @@
     <main>
         <section id="dispatch" class="tab-view active">
             <div class="intel-card">
-                <h2 class="headline">The Slyn City Bookstore Grand Opening</h2>
-                <p style="color:var(--gold); font-family:'Oswald'; margin-bottom: 20px;">LATEST INTEL // FIELD REPORT</p>
-                <img src="image_7477d5.jpg" class="feature-img">
-                <p style="font-size: 1.3rem; line-height: 1.8;">
-                    Cultural expansion is underway. [Elite]SlyntX has officially inaugurated the Slyn City Bookstore. This landmark facility serves as the premier hub for trade secrets and faction lore in the northern territories. 
+                <span style="color:var(--gold); font-family:'Oswald'; font-weight:bold;">// FIELD REPORT: SLYN CITY</span>
+                <h2 class="headline">Bookstore Grand Opening & Urban Expansion</h2>
+                <img src="image_7477d5.jpg" class="feature-img" alt="Slyn City Bookstore">
+                <p style="font-size: 1.3rem; line-height: 1.8; color: #ccc;">
+                    Slyn City continues its ascent as the server's cultural capital. [Elite]SlyntX has officially opened the <strong>Bookstore</strong>, providing a sophisticated hub for trade lore. Concurrently, a new medieval fortress has begun construction—rising in just 15 minutes, it serves as a secure bastion for the Slytaly faction.
                 </p>
-                <div style="margin-top: 30px; border-top: 1px solid var(--border); padding-top: 20px;">
-                    <h3 style="font-family:'Oswald'; font-size: 1.5rem; margin-bottom: 10px;">CONSTRUCTION RECORD: CASTLE ALERT</h3>
-                    <p style="font-size: 1.1rem; color: #aaa;">
-                        A major medieval construction project has been initiated in Slyn City. The site will serve as a secure strategic position for Slytaly members. Reports indicate a new player has shattered records by beginning this grand fortress just 15 minutes after arrival.
-                    </p>
-                </div>
+            </div>
+            
+            <div class="intel-card">
+                <span style="color:var(--deep-red); font-family:'Oswald'; font-weight:bold;">// PERSONNEL INTEL</span>
+                <h2 class="headline">[Elite]SlyntX: The Visionary of Slytaly</h2>
+                <img src="image_7477d1.jpg" class="feature-img" alt="SlyntX Portrait">
+                <p style="font-size: 1.2rem; line-height: 1.7; color: #bbb;">
+                    The driving force behind the Slyn City renaissance. SlyntX remains the top-tier economic power on GeoForge, consistently leading the Wealth Index while spearheading massive infrastructure projects.
+                </p>
             </div>
         </section>
 
         <section id="archives" class="tab-view">
             <div class="intel-card">
-                <h2 class="headline">Classified Intelligence Archive</h2>
-                <div style="border-left: 4px solid var(--deep-red); padding-left: 25px; margin-bottom: 40px;">
-                    <h3 style="font-family:'Oswald'; color:var(--deep-red); margin-bottom: 10px;">THE NTC CONFLICT</h3>
-                    <p style="font-size: 1.1rem;">Official record of Tito's active denouncement of NTC leadership. The YWS Bureau maintains a permanent registry of faction overreach and aggression against civilian players.</p>
-                </div>
+                <h2 class="headline">Diplomatic Friction: NTC Records</h2>
+                <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px;">
+                    The YWS maintains a permanent archive of Tito's active denouncement of NTC leadership following unprovoked hostility towards civilian players.
+                </p>
                 <div style="border-left: 4px solid var(--gold-dim); padding-left: 25px;">
-                    <h3 style="font-family:'Oswald'; color:var(--gold-dim); margin-bottom: 10px;">INFRASTRUCTURE LOG #001</h3>
-                    <p style="font-size: 1.1rem;">The Great Earthlings Farm: Documented as the largest agricultural production facility in GeoForge history, spanning several thousand blocks.</p>
+                    <h3 style="font-family:'Oswald'; color:var(--gold-dim); margin-bottom: 10px;">HISTORICAL PROJECT #001</h3>
+                    <p><strong>The Great Earthlings Farm:</strong> Documented as the largest agricultural production facility in GeoForge history.</p>
                 </div>
             </div>
         </section>
 
         <section id="economy" class="tab-view">
             <div class="intel-card">
-                <h2 class="headline">Wealth Hegemony: The Lapis Strategy</h2>
-                <div style="background: rgba(255,204,0,0.05); border: 1px dashed var(--gold); padding: 30px;">
-                    <p style="font-size: 1.4rem; line-height: 1.7; margin-bottom: 20px;">
-                        Economic intelligence identifies the <strong>Lapis Meta</strong> as the primary engine for breaking into the server's top 10 wealth bracket:
+                <h2 class="headline">The Lapis Strategy Revealed</h2>
+                <div style="background: rgba(255,204,0,0.03); border: 1px dashed var(--gold-dim); padding: 35px;">
+                    <p style="font-size: 1.4rem; line-height: 1.7; margin-bottom: 25px; color: #fff;">
+                        Economic data suggests the <strong>Lapis Meta</strong> is the most efficient path to the Top 10:
                     </p>
-                    <ul style="list-style: square; margin-left: 20px; font-size: 1.2rem; line-height: 2;">
-                        <li>Deploy Fortune-enchanted equipment for Lapis extraction.</li>
-                        <li>Utilize the <strong>/pw ores</strong> node for optimized liquidation.</li>
-                        <li>Rinse and repeat to secure top-tier equity ranking.</li>
+                    <ul style="list-style: none; font-size: 1.2rem; line-height: 2.2;">
+                        <li><span style="color:var(--gold);">[01]</span> Utilize Fortune-enchanted tools for Lapis extraction.</li>
+                        <li><span style="color:var(--gold);">[02]</span> Direct liquidation via the <strong>/pw ores</strong> node.</li>
+                        <li><span style="color:var(--gold);">[03]</span> Reinvest yield to maintain sovereign ranking.</li>
                     </ul>
                 </div>
             </div>
@@ -168,16 +187,18 @@
         <div class="elite-index">
             <h3 class="index-title">GLOBAL WEALTH INDEX</h3>
             <ul class="rank-list">
-                <li><span>1. [Elite]SlyntX</span><span>$1,240,232</span></li>
-                <li><span>2. SleepyRoosa</span><span>$609,939</span></li>
-                <li><span>3. TheEdgyRocket</span><span>$575,939</span></li>
-                <li><span>4. AlphaPlayer1284</span><span>$436,310</span></li>
-                <li><span>5. BoiledEggs69</span><span>$329,070</span></li>
-                <li class="tito-rank"><span>6. Josip_Broz__Tito</span><span>$326,818</span></li>
-                <li><span>7. _nwonkn4</span><span>$317,901</span></li>
-                <li><span>8. MarcelBziok13</span><span>$282,591</span></li>
+                <li><span>1. [Elite]SlyntX</span><span>$1,240,232.42</span></li>
+                <li><span>2. SleepyRoosa</span><span>$609,939.39</span></li>
+                <li><span>3. TheEdgyRocket</span><span>$575,939.93</span></li>
+                <li><span>4. AlphaPlayer1284</span><span>$436,310.53</span></li>
+                <li><span>5. BoiledEggs69</span><span>$329,070.25</span></li>
+                <li class="tito-rank"><span>6. Josip_Broz__Tito</span><span>$326,818.55</span></li>
+                <li><span>7. _nwonkn4</span><span>$317,901.65</span></li>
+                <li><span>8. MarcelBziok13</span><span>$282,591.75</span></li>
             </ul>
-            <p style="font-family:'VT323'; color: #555; margin-top: 20px; font-size: 1rem;">*DATA VERIFIED</p>
+            <p style="font-family:'VT323'; color: #444; margin-top: 25px; font-size: 1.1rem;">
+                *VERIFIED SYNC:
+            </p>
         </div>
     </aside>
 </div>
@@ -188,7 +209,7 @@
         document.getElementById(tabId).classList.add('active');
         document.querySelectorAll('.tab-menu button').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        window.scrollTo({top: 400, behavior: 'smooth'});
+        window.scrollTo({top: 450, behavior: 'smooth'});
     }
 
     function startClock() {
