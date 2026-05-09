@@ -1,168 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YWS — Titan Bureau Official</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Space+Grotesk:wght@300;500;700&family=Playfair+Display:ital,wght@0,900;1,900&family=Oswald:wght@500;700&family=VT323&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --gold: #ffcc00;
-            --gold-dim: #b8860b;
-            --deep-red: #c00000;
-            --bg: #050505;
-            --glass: rgba(20, 20, 20, 0.9);
-            --border: rgba(255, 255, 255, 0.15);
-            --text: #e0e0e0;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
-
-        .top-nav {
-            background: #000;
-            border-bottom: 2px solid var(--gold-dim);
-            padding: 12px 40px;
-            display: flex; justify-content: space-between;
-            font-family: 'VT323', monospace; color: var(--gold);
-            position: sticky; top: 0; z-index: 1002;
-        }
-
-        header {
-            height: 50vh;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('image_7477d5.jpg');
-            background-size: cover; background-position: center;
-            text-align: center; border-bottom: 1px solid var(--border);
-        }
-
-        .main-logo { font-family: 'Cinzel', serif; font-size: 5rem; color: #fff; line-height: 0.8; }
-        .sub-logo { font-family: 'Oswald', sans-serif; color: var(--deep-red); letter-spacing: 10px; margin-top: 15px; text-transform: uppercase; }
-
-        .tab-menu { background: var(--glass); border-bottom: 1px solid var(--border); display: flex; justify-content: center; }
-        .tab-menu button {
-            background: none; border: none; padding: 20px 30px; color: #888;
-            font-family: 'Oswald'; cursor: pointer; transition: 0.3s;
-        }
-        .tab-menu button.active { color: var(--gold); border-bottom: 3px solid var(--gold); }
-
-        .grid-container {
-            max-width: 1300px; margin: 40px auto; padding: 0 20px;
-            display: grid; grid-template-columns: 1fr 380px; gap: 40px;
-        }
-
-        .intel-card {
-            background: #111; border: 1px solid var(--border); padding: 40px;
-            margin-bottom: 30px; border-top: 4px solid var(--gold);
-        }
-
-        .headline { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 20px; color: #fff; }
-        
-        .feature-img { 
-            width: 100%; border: 1px solid #444; margin: 20px 0; 
-            border-radius: 4px;
-        }
-
-        .elite-index {
-            background: #000; padding: 30px; border: 1px solid var(--gold-dim);
-            border-radius: 4px;
-        }
-        .index-title { font-family: 'Oswald'; color: var(--gold); margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
-
-        .rank-list { list-style: none; font-family: 'VT323', monospace; font-size: 1.6rem; }
-        .rank-list li { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #222; }
-        
-        .tito-rank { 
-            background: rgba(255, 204, 0, 0.1);
-            color: var(--gold); font-weight: bold; padding: 10px !important;
-        }
-
-        .tab-view { display: none; }
-        .tab-view.active { display: block; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YWS — Official Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,400;1,400&family=Oswald:wght@400;700&family=VT323&display=swap" rel="stylesheet">
+<style>
+    *{margin:0;padding:0;box-sizing:border-box; scroll-behavior: smooth;}
+    :root{ --red:#c00; --paper:#f5f0e8; --cream:#ede7d6; --muted:#5a4a3a; --border:#c8bfb0; --gold:#b8860b; }
+    body{background:var(--cream);font-family:'Source Serif 4',serif;color:#111;line-height:1.6;}
+    .weather-box { background: #1a1a1a; color: #0f0; font-family: 'VT323', monospace; padding: 10px 15px; font-size: 18px; text-align: center; border-bottom: 3px solid var(--red); }
+    .ticker{background:var(--red);color:#fff;font-family:'Oswald',sans-serif;font-size:12px;padding:8px 0;overflow:hidden;white-space:nowrap; border-bottom: 2px solid gold;}
+    .ticker-inner{display:inline-block;animation:ticker 25s linear infinite;}
+    @keyframes ticker{from{transform:translateX(100%);}to{transform:translateX(-100%);}}
+    header{background:var(--paper);border-bottom:4px solid var(--red);padding:40px 20px;text-align:center;}
+    .logo-badge{background:var(--red);color:#fff;font-family:'Oswald',sans-serif;display:inline-block;padding:5px 15px;font-weight:900;font-size:28px;margin-bottom:10px; box-shadow: 3px 3px 0 #000;}
+    h1{font-family:'Playfair Display',serif;font-size:52px;letter-spacing:-2px;line-height:1;}
+    nav{background:#fff;border-bottom:1px solid var(--border);text-align:center;position:sticky;top:0;z-index:100;}
+    nav button{background:none; border:none; display:inline-block; padding:15px 25px; font-family:'Oswald',sans-serif; cursor:pointer; color:#333; font-size:13px; font-weight:700; transition:0.2s; text-transform: uppercase;}
+    nav button.active{color:var(--red); border-bottom: 3px solid var(--red);}
+    .container{max-width:1150px;margin:30px auto;padding:0 20px;display:grid;grid-template-columns:1fr 320px;gap:40px;}
+    .page-section { display: none; animation: fadeIn 0.4s; }
+    .page-section.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .hero-news{background:var(--paper);border:2px solid #000;margin-bottom:40px;box-shadow:10px 10px 0px var(--border); padding:45px;}
+    .news-photo { width: 100%; border: 1px solid #000; margin: 15px 0; display: block; }
+    .sidebar-box{background:#fff;border:2px solid #000;padding:25px;margin-bottom:25px; box-shadow: 5px 5px 0 var(--border);}
+    .sidebar-title{font-family:'Oswald',sans-serif;font-size:18px;border-bottom:2px solid #000;margin-bottom:15px;padding-bottom:5px; text-transform: uppercase;}
+    .rich-list{list-style:none; font-family:'VT323', monospace; font-size:19px;}
+    .rich-list li{display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid #eee;}
+    .rich-list .highlight{color:var(--red); font-weight:bold; background: #ffebeb; padding: 0 5px;}
+    footer{background:#111;color:#eee;text-align:center;padding:40px 20px;margin-top:60px;font-family:'Oswald',sans-serif;}
+</style>
 </head>
 <body>
 
-<div class="top-nav">
-    <span>YWS BUREAU // LIVE FEED</span>
-    <span id="live-clock">00:00:00</span>
-    <span>STATUS: SECURE</span>
+<div class="weather-box">YWS BUREAU // LOCAL TIME: <span id="local-time">00:00:00</span> // STATUS: ONLINE</div>
+<div class="ticker">
+    <div class="ticker-inner">🏆 RANK RESTORED: JOSIP_BROZ__TITO RECLAIMS #6 POSITION &nbsp;&nbsp;•&nbsp;&nbsp; 📚 SLYN CITY BOOKSTORE NOW OPEN &nbsp;&nbsp;•&nbsp;&nbsp; 🏰 NEW CASTLE PROJECT BREAKS SPEED RECORDS</div>
 </div>
 
 <header>
-    <h1 class="main-logo">Yugoslav</h1>
-    <h1 class="main-logo" style="color:var(--gold);">World Service</h1>
-    <p class="sub-logo">Sovereign Intel • Slyn City</p>
+    <div class="logo-badge">YWS</div>
+    <h1>Yugoslav World Service</h1>
+    <p>GeoForge Bureau • Reporting Live from Slyn City</p>
 </header>
 
-<nav class="tab-menu">
-    <button class="active" onclick="switchTab('dispatch', this)">DISPATCH</button>
-    <button onclick="switchTab('economy', this)">WEALTH META</button>
+<nav>
+    <button class="active" onclick="openTab(event, 'front')">Latest News</button>
+    <button onclick="openTab(event, 'economy')">Wealth Meta</button>
 </nav>
 
-<div class="grid-container">
+<div class="container">
     <main>
-        <section id="dispatch" class="tab-view active">
-            <div class="intel-card">
-                <h2 class="headline">Slyn City Bookstore Grand Opening</h2>
-                <img src="image_7477d5.jpg" class="feature-img" alt="Bookstore Exterior">
-                <p style="font-size: 1.2rem; line-height: 1.6;">
-                    The Slyn City Bookstore is now officially open. Managed by [Elite]SlyntX, this facility stands as a premier cultural hub for trade secrets and faction lore in the northern territories.
-                </p>
+        <section id="front" class="page-section active">
+            <div class="hero-news">
+                <span style="font-family:'Oswald'; color:var(--red); font-weight:bold;">CULTURAL REVOLUTION</span>
+                <h2 style="font-family:'Playfair Display'; font-size:40px;">Slyn City Bookstore Grand Opening</h2>
+                <img src="image_68a5f0.png" class="news-photo">
+                <p>The skyline of Slyn City is evolving. [Elite]SlyntX has officially inaugurated the Bookstore, a landmark facility serving as the premier hub for trade secrets.</p>
             </div>
-            
-            <div class="intel-card">
-                <h2 class="headline">The Visionary: [Elite]SlyntX</h2>
-                <img src="image_7477d1.jpg" class="feature-img" alt="SlyntX at Bookstore">
-                <p style="font-size: 1.2rem; line-height: 1.6;">
-                    Economic intelligence confirms [Elite]SlyntX as a leading infrastructure developer and the current #1 wealth holder on the server.
-                </p>
+            <div class="hero-news">
+                <h2 style="font-family:'Playfair Display'; font-size:32px;">Construction Record: 15-Minute Castle</h2>
+                <p>A major medieval construction project has been initiated in Slyn City. Reports indicate a new player began this grand fortress just 15 minutes after arrival.</p>
             </div>
         </section>
 
-        <section id="economy" class="tab-view">
-            <div class="intel-card">
-                <h2 class="headline">Wealth Data Verification</h2>
-                <img src="image_74211e.png" class="feature-img" alt="Wealth Screenshot">
-                <p style="font-size: 1.2rem;">Official ledger confirmation of the top economic powers.</p>
+        <section id="economy" class="page-section">
+            <div class="hero-news">
+                <h2 style="font-family:'Playfair Display'; font-size:40px;">Wealth Verification</h2>
+                <img src="image_68b1cc.jpg" class="news-photo">
+                <p>Official ledger confirmation of the top economic powers.</p>
             </div>
         </section>
     </main>
 
     <aside>
-        <div class="elite-index">
-            <h3 class="index-title">GLOBAL WEALTH INDEX</h3>
-            <ul class="rank-list">
-                <li><span>1. [Elite]SlyntX</span><span>$1,240,232.42</span></li>
-                <li><span>2. SleepyRoosa</span><span>$609,939.39</span></li>
-                <li><span>3. TheEdgyRocket</span><span>$575,939.93</span></li>
-                <li><span>4. AlphaPlayer1284</span><span>$436,310.53</span></li>
-                <li><span>5. BoiledEggs69</span><span>$329,070.25</span></li>
-                <li class="tito-rank"><span>6. Josip_Broz__Tito</span><span>$326,818.55</span></li>
-                <li><span>7. _nwonkn4</span><span>$317,901.65</span></li>
-                <li><span>8. MarcelBziok13</span><span>$282,591.75</span></li>
+        <div class="sidebar-box">
+            <h3 class="sidebar-title">SERVER WEALTH RANK</h3>
+            <ul class="rich-list">
+                <li><span>1. [Elite]SlyntX</span> <span>$1,168,624.11</span></li>
+                <li><span>2. SleepyRoosa</span> <span>$609,939.39</span></li>
+                <li><span>3. TheEdgyRocket</span> <span>$575,939.93</span></li>
+                <li><span>4. AlphaPlayer1284</span> <span>$436,310.53</span></li>
+                <li><span>5. BoiledEggs69</span> <span>$329,070.25</span></li>
+                <li class="highlight"><span>6. Josip_Broz__Tito</span> <span>$326,218.55</span></li>
+                <li><span>7. _nwonkn4</span> <span>$317,901.65</span></li>
+                <li><span>8. MarcelBziok13</span> <span>$282,591.75</span></li>
             </ul>
-            <p style="font-family:'VT323'; color: #555; margin-top: 15px;">*VERIFIED DATA</p>
+            <p style="font-family:'VT323'; font-size:13px; margin-top:10px; color:#777;">*Verified Server Data</p>
         </div>
     </aside>
 </div>
 
 <script>
-    function switchTab(tabId, btn) {
-        document.querySelectorAll('.tab-view').forEach(t => t.classList.remove('active'));
-        document.getElementById(tabId).classList.add('active');
-        document.querySelectorAll('.tab-menu button').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-    }
-
-    function startClock() {
-        setInterval(() => {
-            const now = new Date();
-            document.getElementById('live-clock').innerText = now.toLocaleTimeString();
-        }, 1000);
-    }
-    startClock();
+function openTab(evt, tabName) {
+    var i, tabcontent = document.getElementsByClassName("page-section");
+    for (i = 0; i < tabcontent.length; i++) { tabcontent[i].classList.remove("active"); }
+    var tablinks = document.getElementsByTagName("button");
+    for (i = 0; i < tablinks.length; i++) { tablinks[i].classList.remove("active"); }
+    document.getElementById(tabName).classList.add("active");
+    evt.currentTarget.classList.add("active");
+}
+function updateClock() { document.getElementById('local-time').textContent = new Date().toLocaleTimeString(); }
+setInterval(updateClock, 1000); updateClock();
 </script>
-
 </body>
 </html>
