@@ -19,14 +19,12 @@
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
         body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
 
-        /* HUD OVERLAY */
         .hud-border {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             border: 15px solid transparent; border-image: radial-gradient(circle, var(--border) 1%, transparent 100%) 1;
             pointer-events: none; z-index: 1001;
         }
 
-        /* SYSTEM NAV BAR */
         .top-nav {
             background: rgba(0,0,0,0.95);
             border-bottom: 2px solid var(--gold-dim);
@@ -36,11 +34,9 @@
             letter-spacing: 2px; position: sticky; top: 0; z-index: 1002;
         }
 
-        /* HERO SECTION */
         header {
-            height: 65vh;
+            height: 60vh;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            /* IMAGE FIX: SLYN CITY BOOKSTORE EXTERIOR */
             background: linear-gradient(to bottom, rgba(5,5,5,0.4), var(--bg)), url('image_7477d5.jpg');
             background-size: cover; background-position: center; background-attachment: fixed;
             text-align: center; border-bottom: 1px solid var(--border);
@@ -49,7 +45,6 @@
         .main-logo { font-family: 'Cinzel', serif; font-size: clamp(3rem, 10vw, 8rem); color: #fff; text-shadow: 0 0 40px rgba(255,255,255,0.2); line-height: 0.8; }
         .sub-logo { font-family: 'Oswald', sans-serif; color: var(--deep-red); letter-spacing: 12px; margin-top: 20px; font-weight: 700; text-transform: uppercase; }
 
-        /* TABS */
         .tab-menu { background: var(--glass); backdrop-filter: blur(25px); border-bottom: 1px solid var(--border); display: flex; justify-content: center; gap: 20px; }
         .tab-menu button {
             background: none; border: none; padding: 25px 35px; color: #777;
@@ -58,13 +53,11 @@
         .tab-menu button:hover { color: #fff; background: rgba(255,255,255,0.05); }
         .tab-menu button.active { color: var(--gold); border-bottom: 3px solid var(--gold); }
 
-        /* LAYOUT */
         .grid-container {
             max-width: 1400px; margin: 50px auto; padding: 0 40px;
             display: grid; grid-template-columns: 1fr 400px; gap: 50px;
         }
 
-        /* ARTICLE CARDS */
         .intel-card {
             background: var(--glass); border: 1px solid var(--border); padding: 45px;
             border-radius: 4px; position: relative; margin-bottom: 35px;
@@ -76,7 +69,6 @@
 
         .headline { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 25px; font-style: italic; color: #fff; line-height: 1.1; }
         
-        /* IMAGE FIX: NEWS CONTENT PHOTOS */
         .feature-img { 
             width: 100%; border: 1px solid var(--border); margin: 25px 0; 
             border-radius: 4px; box-shadow: 0 0 20px rgba(0,0,0,0.4);
@@ -84,7 +76,6 @@
         }
         .feature-img:hover { transform: scale(1.02); }
 
-        /* SIDEBAR WEALTH DATA */
         .elite-index {
             background: #0a0a0a; padding: 35px; border: 1px solid var(--gold-dim);
             border-radius: 8px; position: sticky; top: 120px; box-shadow: 0 0 50px rgba(0,0,0,1);
@@ -94,12 +85,9 @@
         .rank-list { list-style: none; font-family: 'VT323', monospace; font-size: 1.7rem; }
         .rank-list li { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.03); color: #bbb; }
         
-        /* PLAYER TITO HIGHLIGHT */
         .tito-rank { 
             background: linear-gradient(90deg, rgba(255, 204, 0, 0.15), transparent);
             color: var(--gold) !important; font-weight: bold; padding: 12px 10px !important; border-radius: 4px;
-            text-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
-            border: 1px solid rgba(255, 204, 0, 0.2);
         }
 
         .tab-view { display: none; animation: slideUp 0.7s forwards; }
@@ -137,32 +125,29 @@
             <div class="intel-card">
                 <span style="color:var(--gold); font-family:'Oswald'; font-weight:bold;">// FIELD REPORT: SLYN CITY</span>
                 <h2 class="headline">Bookstore Grand Opening & Urban Expansion</h2>
-                <img src="image_7477d5.jpg" class="feature-img" alt="Slyn City Bookstore">
+                <img src="image_7477d5.jpg" class="feature-img" alt="Slyn City Bookstore Exterior">
                 <p style="font-size: 1.3rem; line-height: 1.8; color: #ccc;">
-                    Slyn City continues its ascent as the server's cultural capital. [Elite]SlyntX has officially opened the <strong>Bookstore</strong>, providing a sophisticated hub for trade lore. Concurrently, a new medieval fortress has begun construction—rising in just 15 minutes, it serves as a secure bastion for the Slytaly faction.
+                    Slyn City continues its ascent as the cultural capital of the northern territories. [Elite]SlyntX has officially inaugurated the Bookstore, providing a premier hub for trade secrets and faction lore.
                 </p>
             </div>
             
             <div class="intel-card">
                 <span style="color:var(--deep-red); font-family:'Oswald'; font-weight:bold;">// PERSONNEL INTEL</span>
                 <h2 class="headline">[Elite]SlyntX: The Visionary of Slytaly</h2>
-                <img src="image_7477d1.jpg" class="feature-img" alt="SlyntX Portrait">
+                <img src="image_7477d1.jpg" class="feature-img" alt="[Elite]SlyntX at the Bookstore">
                 <p style="font-size: 1.2rem; line-height: 1.7; color: #bbb;">
-                    The driving force behind the Slyn City renaissance. SlyntX remains the top-tier economic power on GeoForge, consistently leading the Wealth Index while spearheading massive infrastructure projects.
+                    Consistently leading the Wealth Index, [Elite]SlyntX remains the driving economic force behind the Slyn City renaissance.
                 </p>
             </div>
         </section>
 
         <section id="archives" class="tab-view">
             <div class="intel-card">
-                <h2 class="headline">Diplomatic Friction: NTC Records</h2>
+                <h2 class="headline">Global Wealth Verification</h2>
+                <img src="image_74257c.jpg" class="feature-img" alt="Official Server Wealth Index">
                 <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px;">
-                    The YWS maintains a permanent archive of Tito's active denouncement of NTC leadership following unprovoked hostility towards civilian players.
+                    Bureau records verify current sovereign rankings across the GeoForge server. [Elite]SlyntX maintains the #1 position with $1,241,443.87, followed by SleepyRoosa and TheEdgyRocket.
                 </p>
-                <div style="border-left: 4px solid var(--gold-dim); padding-left: 25px;">
-                    <h3 style="font-family:'Oswald'; color:var(--gold-dim); margin-bottom: 10px;">HISTORICAL PROJECT #001</h3>
-                    <p><strong>The Great Earthlings Farm:</strong> Documented as the largest agricultural production facility in GeoForge history.</p>
-                </div>
             </div>
         </section>
 
@@ -171,12 +156,11 @@
                 <h2 class="headline">The Lapis Strategy Revealed</h2>
                 <div style="background: rgba(255,204,0,0.03); border: 1px dashed var(--gold-dim); padding: 35px;">
                     <p style="font-size: 1.4rem; line-height: 1.7; margin-bottom: 25px; color: #fff;">
-                        Economic data suggests the <strong>Lapis Meta</strong> is the most efficient path to the Top 10:
+                        Economic intelligence identifies the "Lapis Meta" as the optimized path to wealth:
                     </p>
                     <ul style="list-style: none; font-size: 1.2rem; line-height: 2.2;">
-                        <li><span style="color:var(--gold);">[01]</span> Utilize Fortune-enchanted tools for Lapis extraction.</li>
-                        <li><span style="color:var(--gold);">[02]</span> Direct liquidation via the <strong>/pw ores</strong> node.</li>
-                        <li><span style="color:var(--gold);">[03]</span> Reinvest yield to maintain sovereign ranking.</li>
+                        <li><span style="color:var(--gold);">[01]</span> Utilize Fortune-enchanted equipment for Lapis extraction.</li>
+                        <li><span style="color:var(--gold);">[02]</span> Liquidation via trade nodes for maximum yield.</li>
                     </ul>
                 </div>
             </div>
@@ -187,18 +171,16 @@
         <div class="elite-index">
             <h3 class="index-title">GLOBAL WEALTH INDEX</h3>
             <ul class="rank-list">
-                <li><span>1. [Elite]SlyntX</span><span>$1,240,232.42</span></li>
+                <li><span>1. [Elite]SlyntX</span><span>$1,241,443.87</span></li>
                 <li><span>2. SleepyRoosa</span><span>$609,939.39</span></li>
                 <li><span>3. TheEdgyRocket</span><span>$575,939.93</span></li>
-                <li><span>4. AlphaPlayer1284</span><span>$436,310.53</span></li>
+                <li><span>4. AlphaPlayer1284</span><span>$450,665.53</span></li>
                 <li><span>5. BoiledEggs69</span><span>$329,070.25</span></li>
-                <li class="tito-rank"><span>6. Josip_Broz__Tito</span><span>$326,818.55</span></li>
-                <li><span>7. _nwonkn4</span><span>$317,901.65</span></li>
+                <li><span>6. _nwonkn4</span><span>$317,901.65</span></li>
+                <li class="tito-rank"><span>7. Josip_Broz__Tito</span><span>$312,463.55</span></li>
                 <li><span>8. MarcelBziok13</span><span>$282,591.75</span></li>
             </ul>
-            <p style="font-family:'VT323'; color: #444; margin-top: 25px; font-size: 1.1rem;">
-                *VERIFIED SYNC:
-            </p>
+            <p style="font-family:'VT323'; color: #444; margin-top: 25px; font-size: 1.1rem;">*DATA SYNC: VERIFIED</p>
         </div>
     </aside>
 </div>
