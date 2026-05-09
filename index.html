@@ -3,166 +3,694 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YWS — Titan Bureau Official</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Space+Grotesk:wght@300;500;700&family=Playfair+Display:ital,wght@0,900;1,900&family=Oswald:wght@500;700&family=VT323&display=swap" rel="stylesheet">
+    <title>YWS — TITAN_CORE_V9_EXTREME</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Space+Grotesk:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,900;1,900&family=Oswald:wght@400;500;700&family=VT323&display=swap" rel="stylesheet">
+    
     <style>
+        /* ============================================================
+           I. CSS VARIABLES & SYSTEM RESET
+           ============================================================ */
         :root {
             --gold: #ffcc00;
+            --gold-bright: #fff000;
             --gold-dim: #b8860b;
-            --deep-red: #c00000;
-            --bg: #050505;
-            --glass: rgba(20, 20, 20, 0.9);
-            --border: rgba(255, 255, 255, 0.15);
-            --text: #e0e0e0;
+            --gold-glow: rgba(255, 204, 0, 0.4);
+            --deep-red: #ff0000;
+            --red-glow: rgba(255, 0, 0, 0.3);
+            --bg-black: #020205;
+            --glass-dark: rgba(5, 5, 10, 0.95);
+            --glass-light: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+            --neon-blue: #00f2ff;
+            --matrix-green: #00ff41;
+            --font-main: 'Space Grotesk', sans-serif;
+            --font-heading: 'Cinzel', serif;
+            --font-mono: 'VT323', monospace;
+            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            outline: none;
+            -webkit-font-smoothing: antialiased;
+        }
 
-        .top-nav {
-            background: #000;
-            border-bottom: 2px solid var(--gold-dim);
+        body { 
+            background: var(--bg-black); 
+            color: #fff; 
+            font-family: var(--font-main); 
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+
+        /* ============================================================
+           II. BACKGROUND ENGINE (HEX GRID & NOISE)
+           ============================================================ */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.4;
+        }
+
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                rgba(18, 16, 16, 0) 50%, 
+                rgba(0, 0, 0, 0.1) 50%
+            ), 
+            linear-gradient(
+                90deg, 
+                rgba(255, 0, 0, 0.02), 
+                rgba(0, 255, 0, 0.01), 
+                rgba(0, 0, 255, 0.02)
+            );
+            background-size: 100% 3px, 3px 100%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        /* ============================================================
+           III. HUD COMPONENTS
+           ============================================================ */
+        .hud-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1001;
+        }
+
+        .hud-bracket {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--gold-dim);
+            opacity: 0.5;
+        }
+        .top-left { top: 30px; left: 30px; border-right: 0; border-bottom: 0; }
+        .top-right { top: 30px; right: 30px; border-left: 0; border-bottom: 0; }
+        .bot-left { bottom: 30px; left: 30px; border-right: 0; border-top: 0; }
+        .bot-right { bottom: 30px; right: 30px; border-left: 0; border-top: 0; }
+
+        /* ============================================================
+           IV. NAVIGATION & STATUS BAR
+           ============================================================ */
+        .system-bar {
+            background: rgba(0,0,0,0.98);
+            border-bottom: 1px solid var(--gold);
             padding: 12px 40px;
-            display: flex; justify-content: space-between;
-            font-family: 'VT323', monospace; color: var(--gold);
-            position: sticky; top: 0; z-index: 1002;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+            color: var(--gold);
+            font-size: 1.1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1010;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.8);
         }
 
+        .status-pill {
+            padding: 2px 10px;
+            border: 1px solid var(--gold);
+            font-size: 0.8rem;
+            margin-left: 15px;
+            animation: pulse-border 2s infinite;
+        }
+
+        @keyframes pulse-border {
+            0% { border-color: var(--gold); box-shadow: 0 0 5px var(--gold); }
+            50% { border-color: var(--deep-red); box-shadow: 0 0 10px var(--deep-red); }
+            100% { border-color: var(--gold); box-shadow: 0 0 5px var(--gold); }
+        }
+
+        /* ============================================================
+           V. HEADER / HERO SECTION
+           ============================================================ */
         header {
-            height: 50vh;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('image_7477d5.jpg');
-            background-size: cover; background-position: center;
-            text-align: center; border-bottom: 1px solid var(--border);
+            height: 65vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(rgba(2,2,5,0.95), rgba(2,2,5,0.4)), url('image_7477d5.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border);
         }
 
-        .main-logo { font-family: 'Cinzel', serif; font-size: 5rem; color: #fff; line-height: 0.8; }
-        .sub-logo { font-family: 'Oswald', sans-serif; color: var(--deep-red); letter-spacing: 10px; margin-top: 15px; text-transform: uppercase; }
-
-        .tab-menu { background: var(--glass); border-bottom: 1px solid var(--border); display: flex; justify-content: center; }
-        .tab-menu button {
-            background: none; border: none; padding: 20px 30px; color: #888;
-            font-family: 'Oswald'; cursor: pointer; transition: 0.3s;
+        .glitch-title {
+            font-family: var(--font-heading);
+            font-size: clamp(4rem, 15vw, 10rem);
+            color: #fff;
+            text-align: center;
+            line-height: 0.85;
+            letter-spacing: -5px;
+            z-index: 2;
         }
-        .tab-menu button.active { color: var(--gold); border-bottom: 3px solid var(--gold); }
 
-        .grid-container {
-            max-width: 1300px; margin: 40px auto; padding: 0 20px;
-            display: grid; grid-template-columns: 1fr 380px; gap: 40px;
+        .glitch-title span {
+            display: block;
+            color: var(--gold);
+            text-shadow: 0 0 20px var(--gold-glow);
+        }
+
+        .subtitle {
+            font-family: 'Oswald';
+            text-transform: uppercase;
+            letter-spacing: 12px;
+            color: var(--deep-red);
+            font-weight: 700;
+            margin-top: 30px;
+            font-size: 1.2rem;
+            z-index: 2;
+        }
+
+        /* ============================================================
+           VI. MAIN NAVIGATION TABS
+           ============================================================ */
+        .tab-wrapper {
+            background: rgba(10, 10, 15, 0.9);
+            backdrop-filter: blur(25px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: center;
+            position: sticky;
+            top: 50px;
+            z-index: 1009;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 25px 40px;
+            color: #666;
+            font-family: 'Oswald';
+            font-size: 1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .tab-btn:hover { color: #fff; }
+
+        .tab-btn.active {
+            color: var(--gold);
+            background: rgba(255,204,0,0.02);
+        }
+
+        .tab-btn.active::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gold);
+            box-shadow: 0 0 15px var(--gold);
+        }
+
+        /* ============================================================
+           VII. CONTENT LAYOUT ENGINE
+           ============================================================ */
+        .main-content {
+            max-width: 1700px;
+            margin: 60px auto;
+            padding: 0 60px;
+            display: grid;
+            grid-template-columns: 1fr 480px;
+            gap: 80px;
         }
 
         .intel-card {
-            background: #111; border: 1px solid var(--border); padding: 40px;
-            margin-bottom: 30px; border-top: 4px solid var(--gold);
-        }
-
-        .headline { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 20px; color: #fff; }
-        
-        .feature-img { 
-            width: 100%; border: 1px solid #444; margin: 20px 0; 
+            background: var(--glass-dark);
+            border: 1px solid var(--border);
+            padding: 60px;
             border-radius: 4px;
+            margin-bottom: 60px;
+            position: relative;
+            transition: var(--transition);
         }
 
-        .elite-index {
-            background: #000; padding: 30px; border: 1px solid var(--gold-dim);
-            border-radius: 4px;
-        }
-        .index-title { font-family: 'Oswald'; color: var(--gold); margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
-
-        .rank-list { list-style: none; font-family: 'VT323', monospace; font-size: 1.6rem; }
-        .rank-list li { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #222; }
-        
-        .tito-rank { 
-            background: rgba(255, 204, 0, 0.1);
-            color: var(--gold); font-weight: bold; padding: 10px !important;
+        .intel-card:hover {
+            border-color: rgba(255, 204, 0, 0.3);
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            transform: translateY(-5px);
         }
 
-        .tab-view { display: none; }
-        .tab-view.active { display: block; }
+        .intel-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gold);
+        }
+
+        .headline-xl {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-style: italic;
+            font-weight: 900;
+            line-height: 0.9;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        .media-container {
+            border: 1px solid var(--border);
+            padding: 10px;
+            background: #000;
+            margin: 40px 0;
+        }
+
+        .media-container img {
+            width: 100%;
+            display: block;
+            filter: contrast(1.1) brightness(0.9);
+            transition: var(--transition);
+        }
+
+        .media-container img:hover {
+            filter: contrast(1.2) brightness(1.1);
+        }
+
+        /* ============================================================
+           VIII. TERMINAL SYSTEM
+           ============================================================ */
+        .terminal-window {
+            background: #000;
+            border: 1px solid var(--matrix-green);
+            padding: 25px;
+            font-family: var(--font-mono);
+            color: var(--matrix-green);
+            font-size: 1.2rem;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--matrix-green);
+            color: #000;
+            padding: 2px 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background: var(--matrix-green);
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* ============================================================
+           IX. SIDEBAR DOSSIER & ANALYTICS
+           ============================================================ */
+        aside section {
+            background: #050508;
+            border: 1px solid var(--border);
+            padding: 40px;
+            margin-bottom: 40px;
+            position: sticky;
+            top: 150px;
+        }
+
+        .section-tag {
+            font-family: 'Oswald';
+            color: var(--gold);
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .wealth-index { list-style: none; }
+
+        .wealth-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-family: var(--font-mono);
+            font-size: 1.8rem;
+        }
+
+        .wealth-item:last-child { border: 0; }
+
+        .tito-row {
+            background: linear-gradient(90deg, rgba(255,204,0,0.1), transparent);
+            border: 1px solid rgba(255,204,0,0.3);
+            margin: 10px -10px;
+            padding: 18px 20px;
+            color: var(--gold);
+            position: relative;
+        }
+
+        .tito-row::after {
+            content: "LATEST VERIFIED";
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            background: var(--gold);
+            color: #000;
+            font-size: 0.6rem;
+            padding: 2px 5px;
+            font-weight: bold;
+        }
+
+        /* ============================================================
+           X. FACTION RADAR
+           ============================================================ */
+        .radar-box {
+            width: 100%;
+            aspect-ratio: 1;
+            border: 1px solid var(--gold-dim);
+            border-radius: 50%;
+            position: relative;
+            margin: 30px 0;
+            background: radial-gradient(circle, rgba(255,204,0,0.1) 0%, transparent 70%);
+            overflow: hidden;
+        }
+
+        .radar-sweep {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--gold-glow) 0%, transparent 50%);
+            transform-origin: center;
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .radar-dot {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--deep-red);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--deep-red);
+            animation: ping 2s infinite;
+        }
+
+        @keyframes ping { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(3); opacity: 0; } }
+
+        /* ============================================================
+           XI. TAB LOGIC
+           ============================================================ */
+        .tab-content { display: none; }
+        .tab-content.active { 
+            display: block; 
+            animation: contentFade 0.8s forwards;
+        }
+
+        @keyframes contentFade {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============================================================
+           XII. FOOTER
+           ============================================================ */
+        footer {
+            padding: 100px 60px;
+            background: #000;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-family: var(--font-mono);
+            color: #444;
+        }
+
+        /* ============================================================
+           XIII. SCROLLBAR
+           ============================================================ */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
     </style>
 </head>
 <body>
 
-<div class="top-nav">
-    <span>YWS BUREAU // LIVE FEED</span>
-    <span id="live-clock">00:00:00</span>
-    <span>STATUS: SECURE</span>
-</div>
+    <canvas id="bg-canvas"></canvas>
+    <div class="scanlines"></div>
 
-<header>
-    <h1 class="main-logo">Yugoslav</h1>
-    <h1 class="main-logo" style="color:var(--gold);">World Service</h1>
-    <p class="sub-logo">Sovereign Intel • Slyn City</p>
-</header>
+    <div class="hud-overlay">
+        <div class="hud-bracket top-left"></div>
+        <div class="hud-bracket top-right"></div>
+        <div class="hud-bracket bot-left"></div>
+        <div class="hud-bracket bot-right"></div>
+    </div>
 
-<nav class="tab-menu">
-    <button class="active" onclick="switchTab('dispatch', this)">DISPATCH</button>
-    <button onclick="switchTab('economy', this)">WEALTH META</button>
-</nav>
-
-<div class="grid-container">
-    <main>
-        <section id="dispatch" class="tab-view active">
-            <div class="intel-card">
-                <h2 class="headline">Slyn City Bookstore Grand Opening</h2>
-                <img src="image_7477d5.jpg" class="feature-img" alt="Bookstore Exterior">
-                <p style="font-size: 1.2rem; line-height: 1.6;">
-                    The Slyn City Bookstore is now officially open. Managed by [Elite]SlyntX, this facility stands as a premier cultural hub for trade secrets and faction lore in the northern territories.
-                </p>
-            </div>
-            
-            <div class="intel-card">
-                <h2 class="headline">The Visionary: [Elite]SlyntX</h2>
-                <img src="image_7477d1.jpg" class="feature-img" alt="SlyntX at Bookstore">
-                <p style="font-size: 1.2rem; line-height: 1.6;">
-                    Economic intelligence confirms [Elite]SlyntX as a leading infrastructure developer and the current #1 wealth holder on the server.
-                </p>
-            </div>
-        </section>
-
-        <section id="economy" class="tab-view">
-            <div class="intel-card">
-                <h2 class="headline">Wealth Data Verification</h2>
-                <img src="image_74211e.png" class="feature-img" alt="Wealth Screenshot">
-                <p style="font-size: 1.2rem;">Official ledger confirmation of the top economic powers.</p>
-            </div>
-        </section>
-    </main>
-
-    <aside>
-        <div class="elite-index">
-            <h3 class="index-title">GLOBAL WEALTH INDEX</h3>
-            <ul class="rank-list">
-                <li><span>1. [Elite]SlyntX</span><span>$1,240,232.42</span></li>
-                <li><span>2. SleepyRoosa</span><span>$609,939.39</span></li>
-                <li><span>3. TheEdgyRocket</span><span>$575,939.93</span></li>
-                <li><span>4. AlphaPlayer1284</span><span>$436,310.53</span></li>
-                <li><span>5. BoiledEggs69</span><span>$329,070.25</span></li>
-                <li class="tito-rank"><span>6. Josip_Broz__Tito</span><span>$326,818.55</span></li>
-                <li><span>7. _nwonkn4</span><span>$317,901.65</span></li>
-                <li><span>8. MarcelBziok13</span><span>$282,591.75</span></li>
-            </ul>
-            <p style="font-family:'VT323'; color: #555; margin-top: 15px;">*VERIFIED DATA</p>
+    <div class="system-bar">
+        <div>
+            <span>YWS_BUREAU // CORE_OS_V9</span>
+            <span class="status-pill">CONNECTION: SECURE</span>
         </div>
-    </aside>
-</div>
+        <div id="live-clock">// 00:00:00 //</div>
+        <div>
+            <span>THREAT_LEVEL: <span style="color:var(--deep-red)">MODERATE</span></span>
+        </div>
+    </div>
 
-<script>
-    function switchTab(tabId, btn) {
-        document.querySelectorAll('.tab-view').forEach(t => t.classList.remove('active'));
-        document.getElementById(tabId).classList.add('active');
-        document.querySelectorAll('.tab-menu button').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-    }
+    <header>
+        <div class="glitch-title">
+            YUGOSLAV
+            <span>WORLD SERVICE</span>
+        </div>
+        <div class="subtitle">Sovereign Intelligence • Titan Division</div>
+    </header>
 
-    function startClock() {
-        setInterval(() => {
+    <nav class="tab-wrapper">
+        <button class="tab-btn active" onclick="switchView('intel', this)">Intel_Stream</button>
+        <button class="tab-btn" onclick="switchView('ledger', this)">Wealth_Meta</button>
+        <button class="tab-btn" onclick="switchView('archive', this)">Faction_Vault</button>
+        <button class="tab-btn" onclick="switchView('security', this)">Defense_Grid</button>
+    </nav>
+
+    <div class="main-content">
+        <main>
+            <section id="intel" class="tab-content active">
+                <div class="intel-card">
+                    <h2 class="headline-xl">Slyn City: The Cultural Expansion</h2>
+                    <span class="section-tag">LOG_DATE: 2024.11.12</span>
+                    <div class="media-container">
+                        <img src="image_7477d5.jpg" alt="Slyn City Bookstore">
+                    </div>
+                    <p style="font-size: 1.5rem; line-height: 1.8; color: #bbb;">
+                        Deep-field observation confirms the successful inauguration of the **Slyn City Bookstore**. Managed by [Elite]SlyntX, this facility serves as the primary strategic node for knowledge exchange and lore preservation in the Northern Sector.
+                    </p>
+                    
+                    <div class="terminal-window">
+                        <div class="terminal-header">OS_CONSOLE_V4.2</div>
+                        <div>> INITIALIZING SCAN OF SLYN CITY SECTORS...</div>
+                        <div>> DETECTING NEW CONSTRUCTION ASSETS...</div>
+                        <div>> ALERT: 15-MINUTE CASTLE RECORD SHATTERED.</div>
+                        <div>> ARCHITECT IDENTIFIED AS SLYTALY OPERATIVE.</div>
+                        <div>> STATUS: INFRASTRUCTURE REINFORCING. <span class="cursor"></span></div>
+                    </div>
+                </div>
+
+                <div class="intel-card" style="border-top: 4px solid var(--deep-red);">
+                    <h2 class="headline-xl">NTC Conflict Registry</h2>
+                    <p style="font-size: 1.3rem; line-height: 1.7;">
+                        The Bureau continues to log the ongoing aggression from NTC leadership. Historical denouncements from Josip_Broz__Tito highlight a recurring pattern of faction overreach and economic bullying.
+                    </p>
+                </div>
+            </section>
+
+            <section id="ledger" class="tab-content">
+                <div class="intel-card">
+                    <h2 class="headline-xl">The Wealth Hegemony</h2>
+                    <div class="media-container">
+                        <img src="image_74211e.png" alt="Economy Ledger">
+                    </div>
+                    <p style="font-size: 1.3rem; margin-bottom: 40px;">Official server ledgers confirm a rigid economic hierarchy. The Lapis-Exchange Meta remains the primary engine of capital growth for the elite class.</p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                        <div style="background: rgba(0,242,255,0.05); padding: 30px; border: 1px solid var(--neon-blue);">
+                            <h4 style="font-family:'Oswald'; color:var(--neon-blue); margin-bottom: 15px;">STRATEGY: LAPIS LIQUIDATION</h4>
+                            <p style="font-size: 1rem; color: #888;">Utilizing Fortune-III efficiency to generate massive lapis yields, then liquidating via the <code>/pw ores</code> exchange node.</p>
+                        </div>
+                        <div style="background: rgba(255,204,0,0.05); padding: 30px; border: 1px solid var(--gold);">
+                            <h4 style="font-family:'Oswald'; color:var(--gold); margin-bottom: 15px;">ASSET: GREAT FARM</h4>
+                            <p style="font-size: 1rem; color: #888;">The Bureau confirms the Great Earthlings Farm is currently producing thousands of resources per hour to fund Slyn expansion.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="archive" class="tab-content">
+                <div class="intel-card">
+                    <h2 class="headline-xl">Faction Dossiers</h2>
+                    <div class="terminal-window" style="border-color: var(--gold);">
+                        <div class="terminal-header">ENCRYPTED_ARCHIVE_88</div>
+                        <div>FILE_NAME: SLYTALY_ORIGINS.PDF</div>
+                        <div>[DECODING...]</div>
+                        <div>The Slytaly faction, led by [Elite]SlyntX, has established total control over the Slyn City trade routes. Their alliance with Tito's Bureau provides them with unmatched economic intelligence.</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="security" class="tab-content">
+                <div class="intel-card" style="border-left-color: var(--deep-red);">
+                    <h2 class="headline-xl">Defense Grid</h2>
+                    <div style="height: 300px; border: 1px dashed var(--deep-red); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); color: var(--deep-red); font-size: 2rem;">
+                        [ DATA_STREAM_RESTRICTED ]
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <aside>
+            <section>
+                <span class="section-tag">Global_Wealth_Index</span>
+                <ul class="wealth-index">
+                    <li class="wealth-item"><span>01. [Elite]SlyntX</span><span style="color:var(--gold)">$1,240,232</span></li>
+                    <li class="wealth-item"><span>02. SleepyRoosa</span><span>$609,939</span></li>
+                    <li class="wealth-item"><span>03. TheEdgyRocket</span><span>$575,939</span></li>
+                    <li class="wealth-item"><span>04. AlphaPlayer1284</span><span>$436,310</span></li>
+                    <li class="wealth-item"><span>05. BoiledEggs69</span><span>$329,070</span></li>
+                    <li class="wealth-item tito-row"><span>06. J_B_TITO</span><span>$326,818</span></li>
+                    <li class="wealth-item"><span>07. _nwonkn4</span><span>$317,901</span></li>
+                    <li class="wealth-item"><span>08. MarcelBziok13</span><span>$282,591</span></li>
+                </ul>
+            </section>
+
+            <section>
+                <span class="section-tag">Sector_Radar</span>
+                <div class="radar-box">
+                    <div class="radar-sweep"></div>
+                    <div class="radar-dot" style="top:30%; left:40%;"></div>
+                    <div class="radar-dot" style="top:70%; left:20%;"></div>
+                    <div class="radar-dot" style="top:50%; left:80%; background:var(--gold); box-shadow:0 0 10px var(--gold);"></div>
+                </div>
+                <p style="font-family:var(--font-mono); font-size: 0.9rem; color: #555;">
+                    SCANNING: NORTH_SECTOR_SLYN <br>
+                    SIGNAL: STABLE
+                </p>
+            </section>
+
+            <section style="background: var(--deep-red); border: none;">
+                <h3 style="font-family:'Oswald'; color:#000;">THREAT ALERT</h3>
+                <p style="color:#000; font-family:var(--font-mono); margin-top: 10px;">NTC FACTION DETECTED NEAR BORDER. MONITORING CAPITAL FLOWS.</p>
+            </section>
+        </aside>
+    </div>
+
+    <footer>
+        <p>YWS BUREAU // TITAN CORE // ALL RIGHTS RESERVED // 2026</p>
+        <div style="margin-top: 20px; font-size: 0.7rem; color: #222; max-width: 800px; margin-left: auto; margin-right: auto;">
+            The Bureau Operating System (BOS) is a proprietary intelligence engine designed for the monitoring of the GeoForge server economy and political landscape. Unauthorized access to Level 5 encrypted files is strictly prohibited and will result in financial auditing.
+        </div>
+    </footer>
+
+    <script>
+        // 1. DYNAMIC BACKGROUND ENGINE
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let dots = [];
+
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            dots = [];
+            for(let i = 0; i < 150; i++) {
+                dots.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    r: Math.random() * 2
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#ffcc00';
+            ctx.beginPath();
+            dots.forEach(dot => {
+                dot.x += dot.vx;
+                dot.y += dot.vy;
+                if(dot.x < 0 || dot.x > canvas.width) dot.vx *= -1;
+                if(dot.y < 0 || dot.y > canvas.height) dot.vy *= -1;
+                ctx.moveTo(dot.x, dot.y);
+                ctx.arc(dot.x, dot.y, dot.r, 0, Math.PI * 2);
+            });
+            ctx.fill();
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', initCanvas);
+        initCanvas();
+        draw();
+
+        // 2. VIEW SWITCHER
+        function switchView(viewId, btn) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            window.scrollTo({ top: 400, behavior: 'smooth' });
+        }
+
+        // 3. SYSTEM CLOCK
+        function updateClock() {
             const now = new Date();
-            document.getElementById('live-clock').innerText = now.toLocaleTimeString();
-        }, 1000);
-    }
-    startClock();
-</script>
+            document.getElementById('live-clock').innerText = "// " + now.toLocaleTimeString() + " //";
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
 
+        // 4. RANDOM TERMINAL OUTPUT
+        const terminal = document.querySelector('.terminal-window');
+        const logs = [
+            "> [INFO] SLYN CITY DATABASE SYNCED.",
+            "> [WARN] UNKNOWN PLAYER APPROACHING BORDER.",
+            "> [INFO] TITO WEALTH STATUS: HOLDING STEADY.",
+            "> [DATA] LAPIS MARKET VOLATILITY: 0.04%",
+            "> [INFO] NTC AGGRESSION LOGGED IN SECTOR B."
+        ];
+
+        setInterval(() => {
+            const logLine = document.createElement('div');
+            logLine.innerText = logs[Math.floor(Math.random() * logs.length)];
+            if (terminal.children.length > 10) terminal.removeChild(terminal.children[2]);
+            terminal.appendChild(logLine);
+        }, 4000);
+    </script>
 </body>
 </html>
