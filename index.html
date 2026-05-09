@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yugoslav World Service — Official Hub</title>
+<title>Yugoslav World Service — GeoForge News</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,400;1,400&family=Oswald:wght@400;700&family=VT323&display=swap" rel="stylesheet">
 <style>
     *{margin:0;padding:0;box-sizing:border-box; scroll-behavior: smooth;}
@@ -11,122 +11,124 @@
     
     body{background:var(--cream);font-family:'Source Serif 4',serif;color:#111;line-height:1.6;}
 
-    /* DYNAMIC WEATHER & TIME BOX */
-    .weather-box { background: #222; color: #0f0; font-family: 'VT323', monospace; padding: 8px 15px; font-size: 18px; text-align: center; border-bottom: 2px solid #444; letter-spacing: 1px; }
-    #local-time { color: #fff; font-weight: bold; }
+    /* DYNAMIC WEATHER & TIME BAR */
+    .weather-box { background: #1a1a1a; color: #0f0; font-family: 'VT323', monospace; padding: 10px 15px; font-size: 18px; text-align: center; border-bottom: 3px solid var(--red); letter-spacing: 1px; }
+    #local-time { color: #fff; text-decoration: underline; }
 
     /* TICKER */
-    .ticker{background:var(--red);color:#fff;font-family:'Oswald',sans-serif;font-size:12px;padding:8px 0;overflow:hidden;white-space:nowrap; border-bottom: 2px solid gold;}
+    .ticker{background:var(--green);color:#fff;font-family:'Oswald',sans-serif;font-size:12px;padding:8px 0;overflow:hidden;white-space:nowrap;}
     .ticker-inner{display:inline-block;animation:ticker 25s linear infinite;}
     @keyframes ticker{from{transform:translateX(100%);}to{transform:translateX(-100%);}}
 
     /* HEADER */
-    header{background:var(--paper);border-bottom:4px solid var(--red);padding:40px 20px;text-align:center;}
-    .logo-badge{background:var(--red);color:#fff;font-family:'Oswald',sans-serif;display:inline-block;padding:5px 15px;font-weight:900;font-size:28px;margin-bottom:10px; transform: rotate(-2deg); box-shadow: 3px 3px 0 #000;}
-    h1{font-family:'Playfair Display',serif;font-size:52px;letter-spacing:-2px;line-height:1;}
-    .sub-head{font-family:'Oswald',sans-serif;text-transform:uppercase;color:var(--muted);font-size:14px;letter-spacing:3px;margin-top:10px;}
+    header{background:var(--paper);border-bottom:5px double var(--red);padding:50px 20px;text-align:center;}
+    .logo-badge{background:var(--red);color:#fff;font-family:'Oswald',sans-serif;display:inline-block;padding:5px 20px;font-weight:900;font-size:32px;margin-bottom:15px; box-shadow: 4px 4px 0 #000;}
+    h1{font-family:'Playfair Display',serif;font-size:58px;letter-spacing:-2px;line-height:1; margin-bottom: 10px;}
+    .sub-head{font-family:'Oswald',sans-serif;text-transform:uppercase;color:var(--muted);font-size:14px;letter-spacing:4px;}
 
     /* NAV */
-    nav{background:#fff;border-bottom:1px solid var(--border);text-align:center;position:sticky;top:0;z-index:100;box-shadow: 0 4px 10px rgba(0,0,0,0.1);}
-    nav button{background:none; border:none; display:inline-block; padding:15px 25px; font-family:'Oswald',sans-serif; cursor:pointer; color:#333; font-size:13px; font-weight:700; transition:0.1s; text-transform: uppercase;}
-    nav button:hover{color:var(--red); background: #eee; transform: scale(1.05);}
-    nav button.active{color:var(--red); border-bottom: 3px solid var(--red);}
+    nav{background:#fff;border-bottom:1px solid var(--border);text-align:center;position:sticky;top:0;z-index:100;}
+    nav button{background:none; border:none; display:inline-block; padding:18px 30px; font-family:'Oswald',sans-serif; cursor:pointer; color:#333; font-size:14px; font-weight:700; transition:0.2s; text-transform: uppercase;}
+    nav button:hover{background: var(--paper); color: var(--red);}
+    nav button.active{color:var(--red); background: var(--paper); border-bottom: 4px solid var(--red);}
 
     /* LAYOUT */
     .container{max-width:1150px;margin:30px auto;padding:0 20px;display:grid;grid-template-columns:1fr 320px;gap:40px;}
     @media(max-width:900px){.container{grid-template-columns:1fr;}}
     
-    .page-section { display: none; animation: fadeIn 0.4s ease-out; }
+    .page-section { display: none; animation: fadeIn 0.5s; }
     .page-section.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-    /* CONTENT STYLES */
-    .hero-news{background:var(--paper);border:2px solid #000;margin-bottom:40px;box-shadow:10px 10px 0px var(--border); padding:45px;}
+    /* NEWS CARDS */
+    .hero-news{background:var(--paper);border:1px solid var(--border);margin-bottom:40px;padding:45px; box-shadow: 12px 12px 0px rgba(0,0,0,0.05);}
+    .hero-title{font-family:'Playfair Display',serif;font-size:48px;line-height:1.05;margin-bottom:20px;}
+    .hero-lead{font-size:24px;color:#222;margin-bottom:25px;font-style:italic;border-left:6px solid var(--red);padding-left:20px; line-height: 1.3;}
     
-    /* FIXING THE IMAGE CONTAINER */
-    .farm-img-container { width: 100%; margin: 25px 0; border: 1px solid #000; background: #ddd; position: relative; }
-    .farm-img-container img { width: 100%; height: auto; display: block; filter: contrast(1.1); }
-    .img-caption { background: #333; color: gold; font-family: 'Oswald'; padding: 8px; font-size: 14px; text-align: center; text-transform: uppercase; border-top: 1px solid #000; }
+    /* BLUEPRINT ART (NO IMAGE NEEDED) */
+    .blueprint-art { background: #2d4a63; border: 4px solid #fff; padding: 40px; margin: 25px 0; text-align: center; color: rgba(255,255,255,0.8); font-family: 'VT323'; border-style: dashed; }
+    .blueprint-art h4 { font-size: 24px; color: #fff; text-transform: uppercase; margin-bottom: 10px; }
 
-    .hero-title{font-family:'Playfair Display',serif;font-size:46px;line-height:1.05;margin-bottom:20px;}
-    .hero-lead{font-size:22px;color:#222;margin-bottom:25px;font-style:italic;border-left:5px solid var(--red);padding-left:20px;}
-    
+    .news-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px;}
+    .news-card{background:white;padding:30px;border:1px solid var(--border); border-top: 4px solid var(--red);}
+
     /* SIDEBAR */
-    .sidebar-box{background:#fff;border:2px solid #000;padding:25px;margin-bottom:25px; box-shadow: 5px 5px 0 var(--border);}
+    .sidebar-box{background:#fff;border:1px solid var(--border);padding:25px;margin-bottom:25px;}
     .sidebar-title{font-family:'Oswald',sans-serif;font-size:18px;border-bottom:2px solid #000;margin-bottom:15px;padding-bottom:5px; text-transform: uppercase;}
     .rich-list{list-style:none; font-family:'VT323', monospace; font-size:20px;}
     .rich-list li{display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid #eee;}
-    .rich-list .highlight{color:var(--red); font-weight:bold; background: #ffebeb; padding: 0 5px;}
+    .rich-list .highlight{color:var(--red); font-weight:bold; background: #fff5f5; padding: 0 5px;}
 
-    footer{background:#111;color:#eee;text-align:center;padding:40px 20px;margin-top:60px;font-family:'Oswald',sans-serif; border-top: 5px solid var(--red);}
+    footer{background:#111;color:#666;text-align:center;padding:60px 20px;margin-top:60px;font-family:'Oswald',sans-serif;}
 </style>
 </head>
 <body>
 
 <div class="weather-box">
-    STATUS: FOGGY // TEMP: 18°C // YOUR LOCAL TIME: <span id="local-time">00:00:00</span> // REGION: GEOFORGE
+    GEO-SYNC: ACTIVE // LOCAL TIME: <span id="local-time">00:00:00</span> // STATUS: STABLE
 </div>
 
 <div class="ticker">
     <div class="ticker-inner">
-        🔥 TITO DENOUNCES NTC "WALLETS" &nbsp;&nbsp;•&nbsp;&nbsp; 🌾 MASSIVE HARVEST: EARTHLINGS UNVEIL LARGEST FARM ON SERVER &nbsp;&nbsp;•&nbsp;&nbsp; 💎 LAPIS MARKET IS THE NEW META &nbsp;&nbsp;•&nbsp;&nbsp; 🏆 JOSIP_BROZ__TITO CLIMBS THE RICH LIST &nbsp;&nbsp;•&nbsp;&nbsp;
+        🗞️ YWS EXCLUSIVE: THE GREAT FARM EXPANSION COMPLETE &nbsp;&nbsp;•&nbsp;&nbsp; 🏛️ POLITICAL TENSIONS: TITO VS WALLETS &nbsp;&nbsp;•&nbsp;&nbsp; 📈 LAPIS PRICES SURGE AT /PW ORES &nbsp;&nbsp;•&nbsp;&nbsp; 🌍 JOIN THE EARTHLINGS DISCORD TODAY &nbsp;&nbsp;•&nbsp;&nbsp;
     </div>
 </div>
 
 <header>
     <div class="logo-badge">YWS</div>
     <h1>Yugoslav World Service</h1>
-    <p class="sub-head">The Voice of the People on GeoForge</p>
+    <p class="sub-head">The Official News Bureau of Josip_Broz__Tito</p>
 </header>
 
-<nav id="navbar">
-    <button class="active" onclick="openTab(event, 'front')">News</button>
+<nav>
+    <button class="active" onclick="openTab(event, 'front')">Front Page</button>
     <button onclick="openTab(event, 'politics')">Politics</button>
     <button onclick="openTab(event, 'economy')">Economy</button>
-    <button onclick="openTab(event, 'farm')">The Great Farm</button>
 </nav>
 
 <div class="container">
     <main>
         <section id="front" class="page-section active">
             <div class="hero-news">
-                <h2 class="hero-title">Tito vs. NTC: Standing for the Innocent</h2>
-                <p class="hero-lead">"NTC leader wallets: attacks another innocent man" — Global chat erupts as Josip_Broz__Tito calls out leadership aggression.</p>
-                <p>The confrontation has become the talk of the server. While others remain silent, Tito has chosen to challenge the status quo, demanding fair treatment for all players.</p>
-                <span style="font-family:'Oswald'; font-size:12px; color:var(--red); margin-top:20px; display:block;">REPORTED BY J.B. TITO</span>
+                <span style="font-family:'Oswald'; color:var(--red); font-weight:bold; letter-spacing:2px;">TOP STORY</span>
+                <h2 class="hero-title">Tito Denounces NTC: "Attacks Another Innocent Man"</h2>
+                <p class="hero-lead">The Earthlings leader stood firm against NTC's Wallets in a public exchange that has redefined server diplomacy.</p>
+                <p>The incident has sparked widespread debate across the GeoForge network. Witnesses claim the unprovoked verbal hostility from NTC leadership was met with calm but firm resistance from Tito, solidifying his reputation as a defender of the server's neutral players.</p>
             </div>
-        </section>
 
-        <section id="farm" class="page-section">
-            <div class="hero-news">
-                <h2 class="hero-title">The Jewel of GeoForge: The Biggest Farm</h2>
-                <p class="hero-lead">An aerial view of the Earthlings' agricultural masterpiece. Fog rolls over the vast fields of the server's largest production facility.</p>
+            <div class="hero-news" style="background:#fff;">
+                <h2 class="hero-title">Agricultural Revolution</h2>
+                <p class="hero-lead">Earthlings unveil the server's largest production facility, a massive feat of engineering and farming.</p>
                 
-                <div class="farm-img-container">
-                    <img src="farm.jpg" alt="Aerial view of the Great Farm">
-                    <div class="img-caption">PHOTO: THE GREAT EARTHLINGS FARM AT DUSK</div>
+                <div class="blueprint-art">
+                    <h4>[ ARCHITECTURAL BLUEPRINT ]</h4>
+                    <p>// PROJECT: THE GREAT FARM //</p>
+                    <p>STATUS: OPERATIONAL</p>
+                    <p>CAPACITY: MAX // REGION: EARTHLINGS</p>
                 </div>
 
-                <p>Spanning thousands of blocks, this facility ensures that the Earthlings faction remains self-sufficient and economically dominant. The scale is unrivaled on the GeoForge Earth map.</p>
+                <p>Spanning a vast territory, this facility utilizes the latest in GeoForge irrigation and planting techniques. It stands not just as a source of food, but as a monument to the industrial power of the Earthlings faction.</p>
             </div>
         </section>
 
         <section id="politics" class="page-section">
-            <h2 style="font-family:'Oswald'; border-bottom: 3px solid #000; margin-bottom: 20px;">POLITICAL DISPATCHES</h2>
-            <div style="background:white; padding:20px; border:1px solid #000;">
-                <h3>Anti-Aggression Policy</h3>
-                <p>Tito’s latest comments have sparked a movement. Several smaller factions are now looking to the Earthlings for protection.</p>
+            <div class="news-grid">
+                <article class="news-card">
+                    <h3 style="font-family:'Playfair Display'; margin-bottom:10px;">The Wallets Controversy</h3>
+                    <p>Analyzing the breakdown in relations between established powers and rising independent nations.</p>
+                </article>
+                <article class="news-card">
+                    <h3 style="font-family:'Playfair Display'; margin-bottom:10px;">Neutrality Pact</h3>
+                    <p>Tito suggests a new alliance structure for players tired of NTC's aggressive expansion tactics.</p>
+                </article>
             </div>
         </section>
 
         <section id="economy" class="page-section">
-            <h2 style="font-family:'Oswald'; border-bottom: 3px solid #000; margin-bottom: 20px;">THE WEALTH META</h2>
-            <div style="background:gold; padding:20px; border:2px solid #000;">
-                <h3>THE LAPIS METHOD</h3>
-                <p><strong>Step 1:</strong> Get a Fortune III Pickaxe.</p>
-                <p><strong>Step 2:</strong> Mine for Lapis Lazuli.</p>
-                <p><strong>Step 3:</strong> Sell at /pw ores.</p>
-                <p>Verified by Leaderboard Top 10.</p>
+            <div class="hero-news" style="background: #fffbe6; border: 2px solid #e6db55;">
+                <h2 class="hero-title" style="color:#856404;">The Lapis Standard</h2>
+                <p class="hero-lead">Fortune III + /pw Ores = The Secret to Millions.</p>
+                <p>Economic analysts have confirmed that Lapis Lazuli is currently the most efficient path to the Top 10 Wealth leaderboard. High-ranking players recommend constant cycles of mining and selling at optimized rates to maintain financial dominance.</p>
             </div>
         </section>
     </main>
@@ -145,15 +147,21 @@
                 <li><span>8. MarcelBziok13</span> <span>$282K</span></li>
             </ul>
         </div>
+        
+        <div class="sidebar-box" style="background:var(--red); color:white; border:none;">
+            <h3 class="sidebar-title" style="border-color:white;">DISPATCHES</h3>
+            <p style="font-size:14px; font-style:italic;">"I'll try to make real news with this."</p>
+            <p style="text-align:right; font-weight:bold; margin-top:10px;">— J.B. Tito</p>
+        </div>
     </aside>
 </div>
 
 <footer>
-    <p>YUGOSLAV WORLD SERVICE • 2026</p>
+    <p>YUGOSLAV WORLD SERVICE • GEOFORGE DIVISION • 2026</p>
 </footer>
 
 <script>
-// TAB SWITCHING FUNCTION
+// Tab Swapping
 function openTab(evt, tabName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("page-section");
@@ -165,14 +173,13 @@ function openTab(evt, tabName) {
     window.scrollTo(0,0);
 }
 
-// REAL-TIME CLOCK FUNCTION
+// Real-Time Local Clock
 function updateClock() {
     const now = new Date();
-    const timeString = now.toLocaleTimeString();
-    document.getElementById('local-time').textContent = timeString;
+    document.getElementById('local-time').textContent = now.toLocaleTimeString();
 }
-setInterval(updateClock, 1000); // Update every second
-updateClock(); // Run immediately
+setInterval(updateClock, 1000);
+updateClock();
 </script>
 
 </body>
